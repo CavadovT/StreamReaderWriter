@@ -38,7 +38,7 @@ namespace StreamReaderWriter
             yenidən obyekti serialize olunacaq json-a və database.json file-na yazılacaq.
              */
             #endregion
-
+            
 
             string pathfolder = @"C:\Users\DELL\OneDrive - Bureau on ICT for Education, Ministry of Education\Desktop\StreamReaderWriter\StreamReaderWriter\Files";
 
@@ -51,21 +51,22 @@ namespace StreamReaderWriter
             {
             File.Create(pathfile);
             }
-            
 
+            Department department = new Department("test");
             try
             {
                 do
                 {
                     Console.Write($"\n1-Add Employe\n2-Get employe by Id\n3-Remove employe\n0-Quit\n");
                     int input = int.Parse(Console.ReadLine());
-                    Department department = new Department("test");
+                   
                     
                     switch (input)
                     {
                         case (int)MenuBar.Add_Employe:
                             {
                                 
+
                                 Console.Write("Please enter the Employe Name: ");
                                 string name=Console.ReadLine();
                                 Console.Write("Please enter the Employe Salary: ");
@@ -83,21 +84,53 @@ namespace StreamReaderWriter
                             }
                         case (int)MenuBar.Get_Employe_By_Id:
                             {
-                                Console.WriteLine("2 isledi");
+                                Console.Write("Id-daxil edin: ");
+                                int inputid=int.Parse(Console.ReadLine());  
+                                string result;
+                                using (StreamReader stream = new StreamReader(pathfile))
+
+                                {
+                                result=stream.ReadToEnd();
+                                   
+                                }
+                                Department depresult = JsonConvert.DeserializeObject<Department>(result);
+
+                                depresult.GetEmployeById(inputid);
+                                
+
                                 break;
                             }
                         case (int)MenuBar.Remove_Employe:
                             {
-                                Console.WriteLine("3 isledi");
+
+                                Console.Write("Please enter the ID: ");
+                                int inputid = int.Parse(Console.ReadLine());
+                                string result;
+                                using (StreamReader stream = new StreamReader(pathfile))
+
+                                {
+                                    result = stream.ReadToEnd();
+
+                                }
+                                Department depresult = JsonConvert.DeserializeObject<Department>(result);
+
+                                depresult.RemoveEmploye(inputid);
+
+                                using (StreamWriter stream = new StreamWriter(pathfile))
+                                {
+                                    stream.WriteLine(JsonConvert.SerializeObject(depresult));
+
+                                }
+
+
                                 break;
                             }
                         case (int)MenuBar.Quit:
                             {
-                                Console.WriteLine("0-isledi");
+                             
                                 return;
                             }
-                        default:
-                            break;
+                      
                     }
 
 
@@ -106,7 +139,7 @@ namespace StreamReaderWriter
             }
             catch (Exception )
             {
-
+                
                 
             }
         }

@@ -39,7 +39,7 @@ namespace StreamReaderWriter.Models
                 _name = value; 
             }
         }
-        List<Employe> Employes
+        public  List<Employe> Employes
         {
             get
             {
@@ -59,7 +59,7 @@ namespace StreamReaderWriter.Models
             _id++;
            IDdepartament = _id;
             Name = name;    
-         _employes= new List<Employe>();
+            _employes=new List<Employe>();
         }
 
         #endregion
@@ -72,12 +72,12 @@ namespace StreamReaderWriter.Models
         }
         public void GetEmployeById(int id) 
         {
-            Employe emp = Employes.Find(n => n.Idemploye == id);
-            if (emp == null) 
+
+            List<Employe> findemloyes = Employes.FindAll(emp1 => emp1.Idemploye == id);
+            foreach (Employe item in findemloyes)
             {
-                throw new Exception("Not Found!!!");
+                item.ShowInfo();
             }
-            Console.WriteLine(emp);
         }
         public void RemoveEmploye(int id) 
         {

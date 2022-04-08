@@ -18,23 +18,13 @@ namespace StreamReaderWriter.Models
         #endregion
 
         #region FIELDS
-        private static int _id;
+        private static int _idemploye;
         private string _name;
         private double _salary;
         #endregion
 
         #region PROPERTIES
-        public int Idemploye 
-        {
-            get
-            {
-                return _id;
-            }
-            set
-            {
-                _id = value;
-            }
-        }
+        public int Idemploye { get; set; }
         public string Name 
         {
             get
@@ -62,8 +52,8 @@ namespace StreamReaderWriter.Models
         #region CONSTRUCTORS
         public Employe(string name, double salary)
         {
-            _id++;
-            Idemploye = _id;
+            _idemploye++;
+            Idemploye = _idemploye;
             Name = name;
             Salary = salary;
             
@@ -73,11 +63,11 @@ namespace StreamReaderWriter.Models
         #region METHODS
         public void ShowInfo() 
         {
-            Console.Write($"\nEmploye's ID: {Idemploye}\nEmploye's Name: {Name}\nEmploye's Salary={Salary}\n");
+            Console.Write($"\nID: {Idemploye}\nEmploye's Name: {Name}\nEmploye's Salary={Salary}\n");
         }
         public override string ToString()
         {
-            return $"\nEmploye's ID: {Idemploye}\nEmploye's Name: {Name}\nEmploye's Salary={Salary}\n";
+            return $"\nEmploye'sID: {Idemploye}\nEmploye's Name: {Name}\nEmploye's Salary={Salary}\n";
         }
         #endregion
     }
