@@ -1,4 +1,6 @@
-﻿using System;
+﻿using StreamReaderWriter.Models;
+using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace StreamReaderWriter
@@ -35,7 +37,8 @@ namespace StreamReaderWriter
              */
             #endregion
 
-            string path = @"C:\Users\DELL\OneDrive - Bureau on ICT for Education, Ministry of Education\Desktop\StreamReaderWriter";
+
+            string path = @"C:\Users\DELL\OneDrive - Bureau on ICT for Education, Ministry of Education\Desktop\StreamReaderWriter\Files";
 
             if (!Directory.Exists(path))
             {
@@ -49,11 +52,19 @@ namespace StreamReaderWriter
                 {
                     Console.Write($"\n1-Add Employe\n2-Get employe by Id\n3-Remove employe\n0-Quit\n");
                     int input = int.Parse(Console.ReadLine());
+                    Department department = new Department("Test");
+                    
                     switch (input)
                     {
                         case (int)MenuBar.Add_Employe:
                             {
-                                Console.WriteLine("1- isledi");
+                                Console.Write("Please enter the Employe Name: ");
+                                string name=Console.ReadLine();
+                                Console.Write("Please enter the Employe Salary: ");
+                                double salary=double.Parse(Console.ReadLine());
+                                Employe employe = new Employe(name, salary);
+                                department.AddEmploye(employe);
+                            
                                 break;
                             }
                         case (int)MenuBar.Get_Employe_By_Id:
@@ -61,12 +72,12 @@ namespace StreamReaderWriter
                                 Console.WriteLine("2 isledi");
                                 break;
                             }
-                        case (int)MenuBar.Remove_Employe: 
+                        case (int)MenuBar.Remove_Employe:
                             {
                                 Console.WriteLine("3 isledi");
                                 break;
                             }
-                        case (int)MenuBar.Quit: 
+                        case (int)MenuBar.Quit:
                             {
                                 Console.WriteLine("0-isledi");
                                 return;

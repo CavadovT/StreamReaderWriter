@@ -39,17 +39,18 @@ namespace StreamReaderWriter.Models
                 _name = value; 
             }
         }
-        public List<Employe> Employes
+        List<Employe> Employes
         {
             get
-            { 
-                return _employes; 
+            {
+                return _employes;
             }
-            set
+            set 
             {
                 _employes = value; 
             }
         }
+       
         #endregion
 
         #region CONSTRUCTORS
@@ -58,7 +59,7 @@ namespace StreamReaderWriter.Models
             _id++;
            IDdepartament = _id;
             Name = name;    
-
+            _employes= new List<Employe>();
         }
 
         #endregion
@@ -66,8 +67,12 @@ namespace StreamReaderWriter.Models
         #region METHODS
         public void AddEmploye(Employe employe) 
         {
-            Employes.Add(employe);
-        
+          Employes.Add(employe);
+            foreach (Employe item in Employes)
+            {
+                item.ShowInfo();
+            }
+
         }
         public void GetEmployeById(int id) 
         {

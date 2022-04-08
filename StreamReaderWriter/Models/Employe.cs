@@ -60,11 +60,13 @@ namespace StreamReaderWriter.Models
         #endregion
 
         #region CONSTRUCTORS
-        public Employe(string name)
+        public Employe(string name, double salary)
         {
             _id++;
             Idemploye = _id;
             Name = name;
+            Salary = salary;
+            
         }
         #endregion
 
