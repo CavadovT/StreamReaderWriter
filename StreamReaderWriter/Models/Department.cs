@@ -59,7 +59,7 @@ namespace StreamReaderWriter.Models
             _id++;
            IDdepartament = _id;
             Name = name;    
-            _employes= new List<Employe>();
+         _employes= new List<Employe>();
         }
 
         #endregion
@@ -68,12 +68,7 @@ namespace StreamReaderWriter.Models
         public void AddEmploye(Employe employe) 
         {
           Employes.Add(employe);
-            foreach (Employe item in Employes)
-            {
-                item.ShowInfo();
-            }
            
-
         }
         public void GetEmployeById(int id) 
         {

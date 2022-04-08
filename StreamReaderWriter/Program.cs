@@ -59,7 +59,7 @@ namespace StreamReaderWriter
                 {
                     Console.Write($"\n1-Add Employe\n2-Get employe by Id\n3-Remove employe\n0-Quit\n");
                     int input = int.Parse(Console.ReadLine());
-                    Department department = new Department("Test");
+                    Department department = new Department("test");
                     
                     switch (input)
                     {
