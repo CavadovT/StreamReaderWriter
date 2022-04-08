@@ -1,7 +1,9 @@
-﻿using StreamReaderWriter.Models;
+﻿using Newtonsoft.Json;
+using StreamReaderWriter.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
+
 
 namespace StreamReaderWriter
 {
@@ -38,13 +40,18 @@ namespace StreamReaderWriter
             #endregion
 
 
-            string path = @"C:\Users\DELL\OneDrive - Bureau on ICT for Education, Ministry of Education\Desktop\StreamReaderWriter\Files";
+            string pathfolder = @"C:\Users\DELL\OneDrive - Bureau on ICT for Education, Ministry of Education\Desktop\StreamReaderWriter\StreamReaderWriter\Files";
 
-            if (!Directory.Exists(path))
+            if (!Directory.Exists(pathfolder))
             {
-                Directory.CreateDirectory(path);
+                Directory.CreateDirectory(pathfolder);
             }
-            Console.Write("This File already available!!!");
+           string pathfile= @"C:\Users\DELL\OneDrive - Bureau on ICT for Education, Ministry of Education\Desktop\StreamReaderWriter\StreamReaderWriter\Files\database.json";
+            if (!File.Exists(pathfile))
+            {
+            File.Create(pathfile);
+            }
+            
 
             try
             {
@@ -58,13 +65,20 @@ namespace StreamReaderWriter
                     {
                         case (int)MenuBar.Add_Employe:
                             {
+                                
                                 Console.Write("Please enter the Employe Name: ");
                                 string name=Console.ReadLine();
                                 Console.Write("Please enter the Employe Salary: ");
                                 double salary=double.Parse(Console.ReadLine());
                                 Employe employe = new Employe(name, salary);
                                 department.AddEmploye(employe);
-                            
+                               
+                                using (StreamWriter stream = new StreamWriter(pathfile))
+                                {
+                                    stream.WriteLine(JsonConvert.SerializeObject(department));
+
+                                }
+
                                 break;
                             }
                         case (int)MenuBar.Get_Employe_By_Id:
@@ -90,10 +104,10 @@ namespace StreamReaderWriter
                 } while (true);
 
             }
-            catch (Exception ex)
+            catch (Exception )
             {
 
-                throw ex;
+                
             }
         }
     }

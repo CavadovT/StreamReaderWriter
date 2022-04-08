@@ -72,6 +72,7 @@ namespace StreamReaderWriter.Models
             {
                 item.ShowInfo();
             }
+           
 
         }
         public void GetEmployeById(int id) 
