@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using StreamReaderWriter.Models;
 using System;
-using System.Collections.Generic;
 using System.IO;
 
 
@@ -38,7 +37,7 @@ namespace StreamReaderWriter
             yenidən obyekti serialize olunacaq json-a və database.json file-na yazılacaq.
              */
             #endregion
-            
+
 
             string pathfolder = @"C:\Users\DELL\OneDrive - Bureau on ICT for Education, Ministry of Education\Desktop\StreamReaderWriter\StreamReaderWriter\Files";
 
@@ -46,34 +45,35 @@ namespace StreamReaderWriter
             {
                 Directory.CreateDirectory(pathfolder);
             }
-           string pathfile= @"C:\Users\DELL\OneDrive - Bureau on ICT for Education, Ministry of Education\Desktop\StreamReaderWriter\StreamReaderWriter\Files\database.json";
+            string pathfile = @"C:\Users\DELL\OneDrive - Bureau on ICT for Education, Ministry of Education\Desktop\StreamReaderWriter\StreamReaderWriter\Files\database.json";
             if (!File.Exists(pathfile))
             {
-            File.Create(pathfile);
+                File.Create(pathfile);
             }
 
-            Department department = new Department("test");
+            Department department = new Department("Test");
+
             try
             {
                 do
                 {
+                    Console.WriteLine("=====MENUBAR=====");
                     Console.Write($"\n1-Add Employe\n2-Get employe by Id\n3-Remove employe\n0-Quit\n");
                     int input = int.Parse(Console.ReadLine());
-                   
-                    
+
+
                     switch (input)
                     {
                         case (int)MenuBar.Add_Employe:
                             {
-                                
 
                                 Console.Write("Please enter the Employe Name: ");
-                                string name=Console.ReadLine();
+                                string name = Console.ReadLine();
                                 Console.Write("Please enter the Employe Salary: ");
-                                double salary=double.Parse(Console.ReadLine());
+                                double salary = double.Parse(Console.ReadLine());
                                 Employe employe = new Employe(name, salary);
                                 department.AddEmploye(employe);
-                               
+
                                 using (StreamWriter stream = new StreamWriter(pathfile))
                                 {
                                     stream.WriteLine(JsonConvert.SerializeObject(department));
@@ -84,63 +84,93 @@ namespace StreamReaderWriter
                             }
                         case (int)MenuBar.Get_Employe_By_Id:
                             {
-                                Console.Write("Id-daxil edin: ");
-                                int inputid=int.Parse(Console.ReadLine());  
-                                string result;
-                                using (StreamReader stream = new StreamReader(pathfile))
-
+                                if (department.Employes.Count == 0)
                                 {
-                                result=stream.ReadToEnd();
-                                   
-                                }
-                                Department depresult = JsonConvert.DeserializeObject<Department>(result);
+                                    Console.WriteLine("Error: Add employe first!!!");
 
-                                depresult.GetEmployeById(inputid);
-                                
+                                }
+                                else
+                                {
+                                    Console.Write("Id-daxil edin: ");
+                                    var inputid = Console.ReadLine();
+                                    int? id;
+                                    if (string.IsNullOrEmpty(inputid))
+                                    {
+                                        id = null;
+                                        department.GetEmployeById(id);
+                                    }
+                                    else
+                                    {
+                                        id = int.Parse(inputid);
+                                        string result;
+                                        using (StreamReader stream = new StreamReader(pathfile))
+
+                                        {
+                                            result = stream.ReadToEnd();
+
+                                        }
+                                        Department depresult = JsonConvert.DeserializeObject<Department>(result);
+
+                                        depresult.GetEmployeById(id);
+
+                                    }
+                                }
+
 
                                 break;
                             }
                         case (int)MenuBar.Remove_Employe:
                             {
-
-                                Console.Write("Please enter the ID: ");
-                                int inputid = int.Parse(Console.ReadLine());
-                                string result;
-                                using (StreamReader stream = new StreamReader(pathfile))
-
+                                if (department.Employes.Count == 0)
                                 {
-                                    result = stream.ReadToEnd();
-
+                                    Console.WriteLine("Error: Add employe first!!!");
                                 }
-                                Department depresult = JsonConvert.DeserializeObject<Department>(result);
-
-                                depresult.RemoveEmploye(inputid);
-
-                                using (StreamWriter stream = new StreamWriter(pathfile))
+                                else
                                 {
-                                    stream.WriteLine(JsonConvert.SerializeObject(depresult));
+                                    Console.Write("Please enter the ID: ");
+                                    var idinput = Console.ReadLine();
+                                    int? id;
+                                    string result;
+                                    if (string.IsNullOrEmpty(idinput))
+                                    {
+                                        id = null;
+                                        department.RemoveEmploye(id);
+                                    }
+                                    else
+                                    {
+                                        id = Convert.ToInt32(idinput);
+                                        using (StreamReader stream = new StreamReader(pathfile))
+                                        {
+                                            result = stream.ReadToEnd();
+                                        }
+                                        department = JsonConvert.DeserializeObject<Department>(result);
 
+                                        department.RemoveEmploye(id);
+
+                                        string resultnew = JsonConvert.SerializeObject(department);
+
+                                        using (StreamWriter stream = new StreamWriter(pathfile))
+                                        {
+                                            stream.Write(resultnew);
+                                        }
+
+                                    }
                                 }
-
-
+                                
                                 break;
                             }
                         case (int)MenuBar.Quit:
                             {
-                             
                                 return;
                             }
-                      
                     }
-
 
                 } while (true);
 
             }
-            catch (Exception )
+            catch (Exception)
             {
-                
-                
+
             }
         }
     }

@@ -50,10 +50,10 @@ namespace StreamReaderWriter.Models
                 _employes = value; 
             }
         }
-       
         #endregion
-
+ 
         #region CONSTRUCTORS
+
         public Department(string name)
         {
             _id++;
@@ -68,27 +68,39 @@ namespace StreamReaderWriter.Models
         public void AddEmploye(Employe employe) 
         {
           Employes.Add(employe);
-           
+          
         }
-        public void GetEmployeById(int id) 
+       
+        public void GetEmployeById(int? id) 
         {
+            if (id == null) 
+            {
+                Console.WriteLine("Id is NUll");
+                return;
+            }
 
             List<Employe> findemloyes = Employes.FindAll(emp1 => emp1.Idemploye == id);
             foreach (Employe item in findemloyes)
             {
                 item.ShowInfo();
             }
+           
         }
-        public void RemoveEmploye(int id) 
+        public void RemoveEmploye(int? id) 
         {
-            Employe emp = Employes.Find(m => m.Idemploye == id);
-            if (emp == null) 
+            if (id == null) 
             {
-                throw new InvalidOperationException("Invalid Operation");
-
+                Console.WriteLine("Id is NULL");
+                return;
             }
-            Employes.Remove(emp);
+            List<Employe> emp = Employes.FindAll(m => m.Idemploye == id);
+            foreach (var item in emp)
+            {
+            Employes.Remove(item);
             Console.WriteLine("Successfully Removed");
+             return;
+            }
+
         }
         #endregion
 

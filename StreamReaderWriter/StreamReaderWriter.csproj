@@ -9,4 +9,6 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
+  <ProjectExtensions><VisualStudio><UserProperties files_4database_1json__JsonSchema="Z" /></VisualStudio></ProjectExtensions>
+
 </Project>

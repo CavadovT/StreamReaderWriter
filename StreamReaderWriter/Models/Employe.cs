@@ -25,6 +25,7 @@ namespace StreamReaderWriter.Models
 
         #region PROPERTIES
         public int Idemploye { get; set; }
+        
         public string Name 
         {
             get
@@ -50,14 +51,18 @@ namespace StreamReaderWriter.Models
         #endregion
 
         #region CONSTRUCTORS
-        public Employe(string name, double salary)
+        public Employe()
         {
-            _idemploye++;
-            Idemploye = _idemploye;
-            Name = name;
-            Salary = salary;
             
         }
+        public Employe(string name, double salary)
+        {
+            Name = name;
+            Salary = salary;
+            _idemploye++;
+            Idemploye = _idemploye;
+        }
+
         #endregion
 
         #region METHODS
