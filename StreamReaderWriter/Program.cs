@@ -9,6 +9,7 @@ namespace StreamReaderWriter
     enum MenuBar { Quit, Add_Employe, Get_Employe_By_Id, Remove_Employe }
     internal class Program
     {
+
         static void Main(string[] args)
         {
             #region COMMITS AND CONDITIONS

@@ -51,12 +51,23 @@ namespace StreamReaderWriter.Models
         #endregion
 
         #region CONSTRUCTORS
+        /// <summary>
+        /// bura nebde ancaq remov edende isleyir ve yeni bir instas olmur id de artmir!!!
+        /// </summary>
         public Employe()
-        {
+        { 
+            //Console.WriteLine("BU konstructor remov islediyinde isleyir bos id artmasin");
+            
             
         }
+        /// <summary>
+        /// burada ise menemenim Id im artir yeni bir employe yaradir instas edirem onuncunde removda bura islemir ve id heleki sabit qalir!!!!
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="salary"></param>
         public Employe(string name, double salary)
         {
+            //Console.WriteLine("BU konstructor yeni bir employe yaradanda add edende islesin ve id burda static artsin");
             Name = name;
             Salary = salary;
             _idemploye++;
