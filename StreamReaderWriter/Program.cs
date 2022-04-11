@@ -54,7 +54,7 @@ namespace StreamReaderWriter
 
             Department department = new Department("Test");
 
-            try
+        M1: try
             {
                 do
                 {
@@ -157,7 +157,7 @@ namespace StreamReaderWriter
 
                                     }
                                 }
-                                
+
                                 break;
                             }
                         case (int)MenuBar.Quit:
@@ -171,7 +171,8 @@ namespace StreamReaderWriter
             }
             catch (Exception)
             {
-
+                Console.WriteLine("According Press to right key!!!");
+                goto M1;
             }
         }
     }

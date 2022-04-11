@@ -73,6 +73,7 @@ namespace StreamReaderWriter.Models
        
         public void GetEmployeById(int? id) 
         {
+            int countfind=0;
             if (id == null) 
             {
                 Console.WriteLine("Id is NUll");
@@ -83,11 +84,18 @@ namespace StreamReaderWriter.Models
             foreach (Employe item in findemloyes)
             {
                 item.ShowInfo();
+                countfind++;
+
+            }
+            if (countfind == 0) 
+            {
+                Console.WriteLine("Not Found ");
             }
            
         }
         public void RemoveEmploye(int? id) 
         {
+            int counfind = 0;
             if (id == null) 
             {
                 Console.WriteLine("Id is NULL");
@@ -97,8 +105,13 @@ namespace StreamReaderWriter.Models
             foreach (var item in emp)
             {
             Employes.Remove(item);
+                counfind++;
             Console.WriteLine("Successfully Removed");
              return;
+            }
+            if (counfind == 0) 
+            {
+                Console.WriteLine("Not Found this ID employe");
             }
 
         }
